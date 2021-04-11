@@ -1,0 +1,19 @@
+﻿<Window x:Class="MotorCarsMoscowD.EditEmployee"
+        WindowStartupLocation="CenterScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MotorCarsMoscowD"
+        mc:Ignorable="d"
+        Title="MotorCarsMoscow" Height="450" Width="800">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="shiny-black-background.jpg"/>
+        </Grid.Background>
+        <Button Content="Назад" HorizontalAlignment="Left" Margin="345,347,0,0" VerticalAlignment="Top" Width="92" Click="Click_back" FontSize="16" FontFamily="Times New Roman" Height="25"/>
+        <Button x:Name="edit_profile" Content="Редактировать свой профиль" HorizontalAlignment="Left" Margin="264,123,0,0" VerticalAlignment="Top" Width="256" Height="46" FontFamily="Times New Roman" FontSize="16" Visibility="Hidden"/>
+        <Button x:Name="edit_all_profiles" Content="Редактировать профиль сотрудника" HorizontalAlignment="Left" Margin="264,181,0,0" VerticalAlignment="Top" Width="256" Height="46" FontFamily="Times New Roman" FontSize="16" Visibility="Hidden"/>
+
+    </Grid>
+</Window>

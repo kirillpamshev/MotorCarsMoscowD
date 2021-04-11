@@ -1,0 +1,23 @@
+﻿<Window x:Class="MotorCarsMoscowD.ShowStat"
+        WindowStartupLocation="CenterScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MotorCarsMoscowD"
+        mc:Ignorable="d"
+        Title="MotorCarsMoscow" Height="450" Width="800">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="shiny-black-background.jpg"/>
+        </Grid.Background>
+        <Button Content="Назад" HorizontalAlignment="Left" Margin="494,362,0,0" VerticalAlignment="Top" Width="224" Click="goBack" FontFamily="Times New Roman" FontSize="16" Background="#FFD8D8D8"/>
+        <DataGrid IsReadOnly="True" HorizontalAlignment="Left" Height="304" Margin="48,48,0,0" VerticalAlignment="Top" Width="670"  x:Name="grid"/>
+        <Button Content="Проданные модели" HorizontalAlignment="Left" Margin="494,21,0,0" VerticalAlignment="Top" Width="224" FontFamily="Times New Roman" FontSize="16" Click="sold_cars"/>
+        <Button Content="Все автомобили" HorizontalAlignment="Left" Margin="48,21,0,0" VerticalAlignment="Top" Width="223" FontFamily="Times New Roman" FontSize="16" Click="all_cars" />
+        <Button Content="Проданные автомобили" HorizontalAlignment="Left" Margin="276,21,0,0" VerticalAlignment="Top" Width="213" FontFamily="Times New Roman" FontSize="16" Click="orders_cars" />
+        <Button Content="Все сотрудники" HorizontalAlignment="Left" Margin="48,362,0,0" VerticalAlignment="Top" Width="223" FontFamily="Times New Roman" FontSize="16" Click="all_employees" />
+        <Button Content="Статистика продаж" HorizontalAlignment="Left" Margin="276,362,0,0" VerticalAlignment="Top" Width="213" FontFamily="Times New Roman" FontSize="16" Click="sellstat" />
+
+    </Grid>
+</Window>
