@@ -1,13 +1,9 @@
-﻿
-using System;
+﻿using System;
 using System.IO;
-using System.Data;
 using System.Windows;
 using System.Data.SqlClient;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-
-
 
 namespace MotorCarsMoscowD
 {
@@ -52,7 +48,6 @@ namespace MotorCarsMoscowD
             this.Close();
 
         }
-
         
         private void brand(object sender, RoutedEventArgs e)
         {
@@ -63,6 +58,9 @@ namespace MotorCarsMoscowD
             add_engine_but.Visibility = Visibility.Hidden;
             add_color_but.Visibility = Visibility.Hidden;
             add_vehicle_but.Visibility = Visibility.Hidden;
+            download.Visibility = Visibility.Hidden;
+            path_photo.Visibility = Visibility.Hidden;
+            lab_add_photo.Visibility = Visibility.Hidden;
 
             brand_id_lab.Visibility = Visibility.Visible;
             brand_id_text.Visibility = Visibility.Visible;
@@ -123,6 +121,9 @@ namespace MotorCarsMoscowD
             add_engine_but.Visibility = Visibility.Hidden;
             add_color_but.Visibility = Visibility.Hidden;
             add_vehicle_but.Visibility = Visibility.Hidden;
+            download.Visibility = Visibility.Hidden;
+            path_photo.Visibility = Visibility.Hidden;
+            lab_add_photo.Visibility = Visibility.Hidden;
 
             model_id_lab.Visibility = Visibility.Visible;
             model_id_text.Visibility = Visibility.Visible;
@@ -267,7 +268,9 @@ namespace MotorCarsMoscowD
             add_engine_but.Visibility = Visibility.Visible;
             add_color_but.Visibility = Visibility.Hidden;
             add_vehicle_but.Visibility = Visibility.Hidden;
-
+            download.Visibility = Visibility.Hidden;
+            path_photo.Visibility = Visibility.Hidden;
+            lab_add_photo.Visibility = Visibility.Hidden;
 
             id_engine_lab.Visibility = Visibility.Visible;
             id_engine_text.Visibility = Visibility.Visible;
@@ -328,7 +331,9 @@ namespace MotorCarsMoscowD
             add_engine_but.Visibility = Visibility.Hidden;
             add_color_but.Visibility = Visibility.Hidden;
             add_vehicle_but.Visibility = Visibility.Hidden;
-
+            download.Visibility = Visibility.Hidden;
+            path_photo.Visibility = Visibility.Hidden;
+            lab_add_photo.Visibility = Visibility.Hidden;
 
             id_body_lab.Visibility = Visibility.Visible;
             id_body_text.Visibility = Visibility.Visible;
@@ -389,7 +394,9 @@ namespace MotorCarsMoscowD
             add_engine_but.Visibility = Visibility.Hidden;
             add_color_but.Visibility = Visibility.Visible;
             add_vehicle_but.Visibility = Visibility.Hidden;
-
+            download.Visibility = Visibility.Hidden;
+            path_photo.Visibility = Visibility.Hidden;
+            lab_add_photo.Visibility = Visibility.Hidden;
 
             id_color_lab.Visibility = Visibility.Visible;
             id_color_text.Visibility = Visibility.Visible;
@@ -450,6 +457,9 @@ namespace MotorCarsMoscowD
             add_engine_but.Visibility = Visibility.Hidden;
             add_color_but.Visibility = Visibility.Hidden;
             add_vehicle_but.Visibility = Visibility.Visible;
+            download.Visibility = Visibility.Visible;
+            path_photo.Visibility = Visibility.Visible;
+            lab_add_photo.Visibility = Visibility.Visible;
 
             add_brand_lab.Visibility = Visibility.Visible;
             add_brand_text.Visibility = Visibility.Visible; //cmb
@@ -607,73 +617,219 @@ namespace MotorCarsMoscowD
            
         }
 
+        public static string check_lwh(string variable)
+        {
+            if (variable.Length == 0)
+                return "Значение не задано";
+            string variable_local = variable.Trim();
+            if (variable_local.Length == 0)
+                return "Заданы одни пробелы";
+
+            Regex regex = new Regex(@"^[1-9][0-9]{3}$");
+            if (!regex.IsMatch(variable_local))
+
+                return "Недопустимый символ";
+
+            return "";
+
+
+        }
+
+        public static string check_id_engine(string variable)
+        {
+            if (variable.Length == 0)
+                return "Значение не задано";
+            string variable_local = variable.Trim();
+            if (variable_local.Length == 0)
+                return "Заданы одни пробелы";
+
+            Regex regex = new Regex(@"^[A-Z0-9]$");
+            if (!regex.IsMatch(variable_local))
+
+                return "Недопустимый символ";
+
+            return "";
+
+
+        }
+
+        public static string check_power(string variable) 
+        {
+            if (variable.Length == 0)
+                return "Значение не задано";
+            string variable_local = variable.Trim();
+            if (variable_local.Length == 0)
+                return "Заданы одни пробелы";
+
+            Regex regex = new Regex(@"^[1-9][0-9]{2}$");
+            if (!regex.IsMatch(variable_local))
+
+                return "Недопустимый символ";
+
+            return "";
+
+
+        }
+
+        public static string check_volume(string variable) 
+        {
+            if (variable.Length == 0)
+                return "Значение не задано";
+            string variable_local = variable.Trim();
+            if (variable_local.Length == 0)
+                return "Заданы одни пробелы";
+
+            Regex regex = new Regex(@"^[1-6]\.[0-9]$");
+            if (!regex.IsMatch(variable_local))
+
+                return "Недопустимый символ";
+
+            return "";
+
+
+        }
+
+        public static string check_vin(string variable)
+        {
+            if (variable.Length == 0)
+                return "Значение не задано";
+            string variable_local = variable.Trim();
+            if (variable_local.Length == 0)
+                return "Заданы одни пробелы";
+
+            Regex regex = new Regex(@"^[A-Z]{10}[0-9]{6}$");
+            if (!regex.IsMatch(variable_local))
+                return "Недопустимый символ";
+            return "";
+
+
+        }
+
+        public static string check_price(string variable)
+        {
+            if (variable.Length == 0)
+                return "Значение не задано";
+            string variable_local = variable.Trim();
+            if (variable_local.Length == 0)
+                return "Заданы одни пробелы";
+
+            Regex regex = new Regex(@"^[0-9]{1,9}(\.[0-9]{2})?$");
+            if (!regex.IsMatch(variable_local))
+
+                return "Недопустимый символ";
+
+            return "";
+
+
+        }
+
+        public static string check_id(string variable)
+        {
+            if (variable.Length == 0)
+                return "Значение не задано";
+            string variable_local = variable.Trim();
+            if (variable_local.Length == 0)
+                return "Заданы одни пробелы";
+
+            Regex regex = new Regex(@"^[A-Z]{1}$");
+            if (!regex.IsMatch(variable_local))
+
+                return "Недопустимый символ";
+
+            return "";
+
+
+        }
+
+        public static string check_name(string variable)
+        {
+            if (variable.Length == 0)
+                return "Значение не задано";
+            string variable_local = variable.Trim();
+            if (variable_local.Length == 0)
+                return "Заданы одни пробелы";
+
+            Regex regex = new Regex(@"^([A-z]+)((-|\s)[A-z]+)*$");
+            if (!regex.IsMatch(variable_local))
+
+                return "Недопустимый символ";
+
+            return "";
+
+
+        }
+
+        public static string check_color_id(string variable)  
+        {
+            if (variable.Length == 0)
+                return "Значение не задано";
+            string variable_local = variable.Trim();
+            if (variable_local.Length == 0)
+                return "Заданы одни пробелы";
+
+            Regex regex = new Regex(@"^#[0-9A-F]{6}$");
+            if (!regex.IsMatch(variable_local)) 
+
+                return "Недопустимый символ";
+
+            return "";
+
+
+        }
+
+        public static string check_color_name(string variable)
+        {
+            if (variable.Length == 0)
+                return "Значение не задано";
+            string variable_local = variable.Trim();
+            if (variable_local.Length == 0)
+                return "Заданы одни пробелы";
+
+            Regex regex = new Regex(@"^[A-zА-я]+$");
+            if (!regex.IsMatch(variable_local))
+
+                return "Недопустимый символ";
+
+            return "";
+
+
+        }
+        
         private void add_brand_but_Click(object sender, RoutedEventArgs e)
         {
-           try { 
-                string brand_id = brand_id_text.Text;
-                string brand_name = brand_name_text.Text;
-                string sqlExpression = " INSERT INTO BRANDS VALUES (@brand_id_value, @brand_name_value) ";
-                SqlCommand command = new SqlCommand(sqlExpression, connection);
-                SqlParameter brand_id_par = new SqlParameter("@brand_id_value", brand_id);
-                command.Parameters.Add(brand_id_par);
-                SqlParameter brand_name_par = new SqlParameter("@brand_name_value", brand_name);
-                command.Parameters.Add(brand_name_par);
-                command.ExecuteNonQuery();
-                brand_id_text.Text = "";
-                brand_name_text.Text = "";
-                MessageBox.Show("Марка " + brand_name + " добавлена!");
-            }
+            bool er = false;
+            string error_msg;
 
-            catch (SqlException en)
+            if ((error_msg = check_id(brand_id_text.Text)) != "")
             {
-                MessageBox.Show((en.Number).ToString() + " " + en.Message);
+                er = true;
+
+            }
+            if ((error_msg = check_name(brand_name_text.Text)) != "")
+            {
+                er = true;
+
             }
 
-        } 
 
-        private void add_model_but_Click(object sender, RoutedEventArgs e)
-        {
-            if (body_text.SelectedItem != null && engine_text.SelectedItem != null && brand_text != null) {
+            if (!er)
+            {
 
-                string model_name_local = model_name_text.Text; //
-                string model_id = model_id_text.Text; //
-                string local_length = length_text.Text; //
-                string local_width = width_text.Text; //
-                string local_height = height_text.Text; //
-                string local_engine = engine_text.Text;
-                string local_brand_id = map2[brand_text.Text];
-                string local_type_body = map[body_text.Text];
                 try
                 {
-                    string sqlExpression = " INSERT INTO MODELS VALUES (@id_model_value, @name_model_value, @id_body_value, @id_brand_value, @id_engine_value, @length_value, @width_value, @height_value) ";
+
+                    string brand_id = brand_id_text.Text;
+                    string brand_name = brand_name_text.Text;
+                    string sqlExpression = " INSERT INTO BRANDS VALUES (@brand_id_value, @brand_name_value) ";
                     SqlCommand command = new SqlCommand(sqlExpression, connection);
-
-                    SqlParameter id_model_par = new SqlParameter("@id_model_value", model_id);
-                    command.Parameters.Add(id_model_par);
-
-                    SqlParameter model_name_par = new SqlParameter("@name_model_value", model_name_local);
-                    command.Parameters.Add(model_name_par);
-
-                    SqlParameter id_body_par = new SqlParameter("@id_body_value", local_type_body);
-                    command.Parameters.Add(id_body_par);
-
-                    SqlParameter id_brand_par = new SqlParameter("@id_brand_value", local_brand_id);
-                    command.Parameters.Add(id_brand_par);
-
-                    SqlParameter id_engine_par = new SqlParameter("@id_engine_value", local_engine);
-                    command.Parameters.Add(id_engine_par);
-
-                    SqlParameter length_par = new SqlParameter("@length_value", local_length);
-                    command.Parameters.Add(length_par);
-
-                    SqlParameter width_par = new SqlParameter("@width_value", local_width);
-                    command.Parameters.Add(width_par);
-
-                    SqlParameter height_par = new SqlParameter("@height_value", local_height);
-                    command.Parameters.Add(height_par);
+                    SqlParameter brand_id_par = new SqlParameter("@brand_id_value", brand_id);
+                    command.Parameters.Add(brand_id_par);
+                    SqlParameter brand_name_par = new SqlParameter("@brand_name_value", brand_name);
+                    command.Parameters.Add(brand_name_par);
                     command.ExecuteNonQuery();
-                    MessageBox.Show("Модель" + model_name_local + "добавлена");
-
+                    brand_id_text.Text = "";
+                    brand_name_text.Text = "";
+                    MessageBox.Show("Марка " + brand_name + " добавлена!");
                 }
 
                 catch (SqlException en)
@@ -681,14 +837,122 @@ namespace MotorCarsMoscowD
                     MessageBox.Show((en.Number).ToString() + " " + en.Message);
                 }
             }
-            //
 
-            //добавить некоторые характеристики из комбо бокса (марка, двигатель)
-        } 
+        }
+
+        private void add_model_but_Click(object sender, RoutedEventArgs e)
+        {
+
+            bool er = false;
+            string error_msg;
+
+            if ((error_msg = check_id(model_id_text.Text)) != "")
+            {
+                er = true;
+
+            }
+            if ((error_msg = check_name(model_name_text.Text)) != "")
+            {
+                er = true;
+
+            }
+
+            if ((error_msg = check_lwh(length_text.Text)) != "")
+            {
+                er = true;
+
+            }
+
+            if ((error_msg = check_lwh(width_text.Text)) != "")
+            {
+                er = true;
+
+            }
+
+            if ((error_msg = check_lwh(height_text.Text)) != "")
+            {
+                er = true;
+
+            }
+
+
+            if (!er)
+            {
+
+                if (body_text.SelectedItem != null && engine_text.SelectedItem != null && brand_text != null)
+                {
+
+                    string model_name_local = model_name_text.Text;
+                    string model_id = model_id_text.Text;
+                    string local_length = length_text.Text; //
+                    string local_width = width_text.Text; //
+                    string local_height = height_text.Text; //
+                    string local_engine = engine_text.Text;
+                    string local_brand_id = map2[brand_text.Text];
+                    string local_type_body = map[body_text.Text];
+                    try
+                    {
+                        string sqlExpression = " INSERT INTO MODELS VALUES (@id_model_value, @name_model_value, @id_body_value, @id_brand_value, @id_engine_value, @length_value, @width_value, @height_value) ";
+                        SqlCommand command = new SqlCommand(sqlExpression, connection);
+
+                        SqlParameter id_model_par = new SqlParameter("@id_model_value", model_id);
+                        command.Parameters.Add(id_model_par);
+
+                        SqlParameter model_name_par = new SqlParameter("@name_model_value", model_name_local);
+                        command.Parameters.Add(model_name_par);
+
+                        SqlParameter id_body_par = new SqlParameter("@id_body_value", local_type_body);
+                        command.Parameters.Add(id_body_par);
+
+                        SqlParameter id_brand_par = new SqlParameter("@id_brand_value", local_brand_id);
+                        command.Parameters.Add(id_brand_par);
+
+                        SqlParameter id_engine_par = new SqlParameter("@id_engine_value", local_engine);
+                        command.Parameters.Add(id_engine_par);
+
+                        SqlParameter length_par = new SqlParameter("@length_value", local_length);
+                        command.Parameters.Add(length_par);
+
+                        SqlParameter width_par = new SqlParameter("@width_value", local_width);
+                        command.Parameters.Add(width_par);
+
+                        SqlParameter height_par = new SqlParameter("@height_value", local_height);
+                        command.Parameters.Add(height_par);
+                        command.ExecuteNonQuery();
+                        MessageBox.Show("Модель" + model_name_local + "добавлена");
+
+                    }
+
+                    catch (SqlException en)
+                    {
+                        MessageBox.Show((en.Number).ToString() + " " + en.Message);
+                    }
+                }
+            }
+        }
 
         private void add_engine_but_Click(object sender, RoutedEventArgs e)
         {
-            if (type_engine_text.SelectedItem != null) {
+            bool er = false;
+            string error_msg;
+
+            if ((error_msg = check_id_engine(id_engine_text.Text)) != "")
+            {
+                er = true;
+
+            }
+            if ((error_msg = check_volume(volume_text.Text)) != "")
+            {
+                er = true;
+
+            }
+            if ((error_msg = check_power(power_text.Text)) != "")
+            {
+                er = true;
+
+            }
+
+            if (type_engine_text.SelectedItem != null && !er) {
                 try
                 {
                     string engine_id = id_engine_text.Text;
@@ -723,7 +987,22 @@ namespace MotorCarsMoscowD
 
         private void add_body_but_Click(object sender, RoutedEventArgs e)
         {
-            if (seat_count_text.SelectedItem != null) {
+
+            bool er = false;
+            string error_msg;
+
+            if ((error_msg = check_id_engine(id_body_text.Text)) != "")
+            {
+                er = true;
+
+            }
+            if ((error_msg = check_name(type_body_text.Text)) != "")
+            {
+                er = true;
+
+            }
+
+            if (seat_count_text.SelectedItem != null && !er) {
                 try
                 {
                     string body_id = id_body_text.Text;
@@ -757,74 +1036,56 @@ namespace MotorCarsMoscowD
 
         private void add_color_but_Click(object sender, RoutedEventArgs e)
         {
+            bool er = false;
+            string error_msg;
 
-           try
+            if ((error_msg = check_color_id(id_color_text.Text)) != "")
             {
-                string color_id = id_color_text.Text;
-                string color_name = name_color_text.Text;
-                
-                string sqlExpression = " INSERT INTO COLORS VALUES (@color_id_value, @color_name_value) ";
-                SqlCommand command = new SqlCommand(sqlExpression, connection);
+                er = true;
 
-                SqlParameter color_id_par = new SqlParameter("@color_id_value", color_id);
-                command.Parameters.Add(color_id_par);
-
-                SqlParameter color_name_par = new SqlParameter("@color_name_value", color_name);
-                command.Parameters.Add(color_name_par);
-
-                command.ExecuteNonQuery();
-                id_color_text.Text = "";
-                name_color_text.Text = "";
-                MessageBox.Show("Цвет " + color_name + " добавлен!");
+            }
+            if ((error_msg = check_color_name(name_color_text.Text)) != "")
+            {
+                er = true;
 
             }
 
-            catch (SqlException en)
+
+            if (!er)
             {
-                MessageBox.Show((en.Number).ToString() + " " + en.Message);
+
+                try
+                {
+                    string color_id = id_color_text.Text;
+                    string color_name = name_color_text.Text;
+
+                    string sqlExpression = " INSERT INTO COLORS VALUES (@color_id_value, @color_name_value) ";
+                    SqlCommand command = new SqlCommand(sqlExpression, connection);
+
+                    SqlParameter color_id_par = new SqlParameter("@color_id_value", color_id);
+                    command.Parameters.Add(color_id_par);
+
+                    SqlParameter color_name_par = new SqlParameter("@color_name_value", color_name);
+                    command.Parameters.Add(color_name_par);
+
+                    command.ExecuteNonQuery();
+                    id_color_text.Text = "";
+                    name_color_text.Text = "";
+                    MessageBox.Show("Цвет " + color_name + " добавлен!");
+
+                }
+
+                catch (SqlException en)
+                {
+                    MessageBox.Show((en.Number).ToString() + " " + en.Message);
+                }
+
             }
-
-        }
-
-        public static string check_vin(string variable)
-        {
-            if (variable.Length == 0)
-                return "Значение не задано";
-            string variable_local = variable.Trim();
-            if (variable_local.Length == 0)
-                return "Заданы одни пробелы";
-            
-            Regex regex = new Regex(@"^[A-Z][A-Z0-9]{15}$");
-            if (!regex.IsMatch(variable_local))
-                return "Недопустимый символ";
-            return "";
-
-
-        }
-
-    
-
-        public static string check_price(string variable)
-        {
-            if (variable.Length == 0)
-                return "Значение не задано";
-            string variable_local = variable.Trim();
-            if (variable_local.Length == 0)
-                return "Заданы одни пробелы";
-            
-            Regex regex = new Regex(@"^[0-9]{1,9}(\.[0-9]{2})?$");
-            if (!regex.IsMatch(variable_local))
-                
-            return "Недопустимый символ";
-            
-            return "";
-
-
         }
 
         private void add_vehicle_but_Click(object sender, RoutedEventArgs e)
         {
-            if (add_brand_text.SelectedItem != null && add_model_text.SelectedItem != null && add_color_text != null) {
+            if (add_brand_text.SelectedItem != null && add_model_text.SelectedItem != null && add_color_text != null ) {
 
                 bool er = false;
                 string error_msg = "";
@@ -833,7 +1094,7 @@ namespace MotorCarsMoscowD
                 FileInfo fInfo = new FileInfo(cur_file_name);
                 long numBytes = fInfo.Length;
 
-                if (numBytes > 52428800) {
+                if (numBytes > 10485760) {
                     MessageBox.Show("Error download file!");
                     er = true;
                 }

@@ -2,9 +2,6 @@
 using System.Data.SqlClient;
 using System.Windows;
 
-
-
-
 namespace MotorCarsMoscowD
 {
 
@@ -22,10 +19,10 @@ namespace MotorCarsMoscowD
         {
             if (login_text.Text.Length > 0 && password_text.Password.Length > 0)
             {
-                /*connection.Open();*/
+               
                 SqlParameter data_user_par = new SqlParameter("@data_user", login_text.Text);
                 SqlParameter pass_word_par = new SqlParameter("@password", password_text.Password);
-                string sqlExpression = "SELECT id_user FROM dbo.USERS WHERE(id_user = @data_user AND pass_word = @password)";
+                string sqlExpression = "SELECT id_user FROM dbo.USERS WHERE(id_user COLLATE Cyrillic_General_CS_AS = @data_user AND pass_word COLLATE Cyrillic_General_CS_AS = @password)";
                 SqlCommand command = new SqlCommand(sqlExpression, connection);
                 command.Parameters.Add(data_user_par);
                 command.Parameters.Add(pass_word_par);
@@ -35,7 +32,7 @@ namespace MotorCarsMoscowD
                     reader.Close();
                     sqlExpression = "SELECT dbo.USERS.id_user, dbo.USERS.id_role, dbo.EMPLOYEES.first_name_employee, " +
                         "dbo.EMPLOYEES.middle_name_employee FROM  dbo.USERS INNER JOIN dbo.EMPLOYEES " +
-                        "ON dbo.USERS.id_user = dbo.EMPLOYEES.id_employee  WHERE (dbo.USERS.id_user = @data_user)";
+                        "ON dbo.USERS.id_user = dbo.EMPLOYEES.id_employee  WHERE (dbo.USERS.id_user COLLATE Cyrillic_General_CS_AS = @data_user)";
                     command = new SqlCommand(sqlExpression, connection);
                     data_user_par = new SqlParameter("@data_user", login_text.Text);
                     command.Parameters.Add(data_user_par);
@@ -48,6 +45,7 @@ namespace MotorCarsMoscowD
                     string first_name = reader.GetString(2);
                     string middle_name = reader.GetString(3);
                     reader.Close();
+                    password_text.Password = "";
                     new menu_actions(connection,  id_user, id_role, first_name, middle_name, this);
                 }
                 else {
